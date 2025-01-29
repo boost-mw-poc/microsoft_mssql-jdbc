@@ -150,7 +150,7 @@ enum SSType {
     TIMESTAMP(Category.TIMESTAMP, "timestamp", JDBCType.BINARY),
     GEOMETRY(Category.UDT, "geometry", JDBCType.GEOMETRY),
     GEOGRAPHY(Category.UDT, "geography", JDBCType.GEOGRAPHY),
-    JSON(Category.JSON, "json", JDBCType.LONGNVARCHAR);
+    JSON(Category.JSON, "json", JDBCType.JSON); 
 
     final Category category;
     private final String name;
@@ -458,10 +458,11 @@ enum JavaType {
                     case NVARCHAR:
                     case NVARCHARMAX:
                     case NTEXT:
-                    case JSON:
                         jdbcType = JDBCType.LONGVARCHAR;
                         break;
-
+                    case JSON:
+                        jdbcType = JDBCType.JSON;
+                        break;
                     case XML:
                     default:
                         jdbcType = JDBCType.LONGVARBINARY;
