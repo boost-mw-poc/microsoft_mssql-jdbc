@@ -115,7 +115,6 @@ abstract class DTVExecuteOp {
     abstract void execute(DTV dtv, TVP tvpValue) throws SQLServerException;
 
     abstract void execute(DTV dtv, SqlVariant sqlVariantValue) throws SQLServerException;
-
 }
 
 
