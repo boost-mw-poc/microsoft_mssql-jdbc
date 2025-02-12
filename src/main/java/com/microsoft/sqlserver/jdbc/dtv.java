@@ -297,8 +297,7 @@ final class DTV {
                 tdsWriter.writeRPCUUID(name, UUID.fromString(strValue), isOutParam);
             } else if (dtv.getJdbcType() == JDBCType.JSON) {
                 tdsWriter.writeRPCJson(name, strValue, isOutParam);
-            } 
-            else {
+            } else {
                 tdsWriter.writeRPCStringUnicode(name, strValue, isOutParam, collation);
             }
         }
