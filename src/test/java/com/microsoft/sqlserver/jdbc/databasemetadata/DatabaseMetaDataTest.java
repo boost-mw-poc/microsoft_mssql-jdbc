@@ -1034,6 +1034,26 @@ public class DatabaseMetaDataTest extends AbstractTest {
         }
     }
 
+    @Test
+    public void testJSONMetaData() throws SQLException {
+        String jsonTableName = RandomUtil.getIdentifier("try_SQLJSON_Table");
+
+        try (Statement stmt = connection.createStatement()) {
+            String sql = "create table " + AbstractSQLGenerator.escapeIdentifier(jsonTableName)
+                    + " (c1 JSON null);";
+            stmt.execute(sql);
+
+            String query = "SELECT * FROM " + AbstractSQLGenerator.escapeIdentifier(jsonTableName);
+            try (Statement statement = connection.createStatement();
+                    ResultSet resultSet = statement.executeQuery(query)) {
+
+                ResultSetMetaData metaData = resultSet.getMetaData();
+                String columnType = metaData.getColumnTypeName(1);
+                assertTrue("JSON".equalsIgnoreCase(columnType));
+            }
+        }
+    }
+
     @BeforeAll
     public static void setupTable() throws Exception {
         setConnection();
