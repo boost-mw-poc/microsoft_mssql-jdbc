@@ -159,7 +159,8 @@ public class BulkCopyISQLServerBulkRecordTest extends AbstractTest {
                 .escapeSingleQuotes(AbstractSQLGenerator.escapeIdentifier(RandomUtil.getIdentifier("dstTable")));
 
         try (Connection conn = DriverManager.getConnection(connectionString);) {
-            try (Statement dstStmt = conn.createStatement(); SQLServerBulkCopy bulkCopy = new SQLServerBulkCopy(conn)) {
+            try (Statement dstStmt = conn.createStatement();
+                    SQLServerBulkCopy bulkCopy = new SQLServerBulkCopy(conn)) {
 
                 dstStmt.executeUpdate(
                         "CREATE TABLE " + dstTable + " (testCol JSON);");
@@ -193,7 +194,8 @@ public class BulkCopyISQLServerBulkRecordTest extends AbstractTest {
                 .escapeSingleQuotes(AbstractSQLGenerator.escapeIdentifier(RandomUtil.getIdentifier("dstTable")));
 
         try (Connection conn = DriverManager.getConnection(connectionString);) {
-            try (Statement dstStmt = conn.createStatement(); SQLServerBulkCopy bulkCopy = new SQLServerBulkCopy(conn)) {
+            try (Statement dstStmt = conn.createStatement();
+                    SQLServerBulkCopy bulkCopy = new SQLServerBulkCopy(conn)) {
 
                 dstStmt.executeUpdate(
                         "CREATE TABLE " + dstTable + " (testCol JSON);");
@@ -235,7 +237,8 @@ public class BulkCopyISQLServerBulkRecordTest extends AbstractTest {
                 .escapeSingleQuotes(AbstractSQLGenerator.escapeIdentifier(RandomUtil.getIdentifier("dstTable")));
 
         try (Connection conn = DriverManager.getConnection(connectionString);) {
-            try (Statement dstStmt = conn.createStatement(); SQLServerBulkCopy bulkCopy = new SQLServerBulkCopy(conn)) {
+            try (Statement dstStmt = conn.createStatement();
+                    SQLServerBulkCopy bulkCopy = new SQLServerBulkCopy(conn)) {
 
                 dstStmt.executeUpdate(
                         "CREATE TABLE " + dstTable + " (testCol1 JSON, testCol2 JSON);");
@@ -277,7 +280,8 @@ public class BulkCopyISQLServerBulkRecordTest extends AbstractTest {
                 .escapeSingleQuotes(AbstractSQLGenerator.escapeIdentifier(RandomUtil.getIdentifier("dstTable")));
 
         try (Connection conn = DriverManager.getConnection(connectionString);) {
-            try (Statement dstStmt = conn.createStatement(); SQLServerBulkCopy bulkCopy = new SQLServerBulkCopy(conn)) {
+            try (Statement dstStmt = conn.createStatement();
+                    SQLServerBulkCopy bulkCopy = new SQLServerBulkCopy(conn)) {
 
                 dstStmt.executeUpdate(
                         "CREATE TABLE " + dstTable + " (testCol JSON);");
@@ -319,7 +323,8 @@ public class BulkCopyISQLServerBulkRecordTest extends AbstractTest {
                 .escapeSingleQuotes(AbstractSQLGenerator.escapeIdentifier(RandomUtil.getIdentifier("dstTable")));
 
         try (Connection conn = DriverManager.getConnection(connectionString);) {
-            try (Statement dstStmt = conn.createStatement(); SQLServerBulkCopy bulkCopy = new SQLServerBulkCopy(conn)) {
+            try (Statement dstStmt = conn.createStatement();
+                    SQLServerBulkCopy bulkCopy = new SQLServerBulkCopy(conn)) {
 
                 dstStmt.executeUpdate(
                         "CREATE TABLE " + dstTable + " (testCol JSON)");
@@ -329,9 +334,7 @@ public class BulkCopyISQLServerBulkRecordTest extends AbstractTest {
                 // JSON data to be inserted
                 String data = "{\"bitCol\":true,\"tinyIntCol\":2,\"smallIntCol\":-32768,\"intCol\":0,\"bigIntCol\":0,\"floatCol\":-1700.0000000000,\"realCol\":-3400.0000000000,\"decimalCol\":22.335600,\"numericCol\":22.3356,\"moneyCol\":-922337203685477.5808,\"smallMoneyCol\":-214748.3648,\"charCol\":\"a5()b\",\"nCharCol\":\"?????\",\"varcharCol\":\"test to test csv files\",\"nVarcharCol\":\"???\",\"binaryCol\":\"6163686974\",\"varBinaryCol\":\"6163686974\",\"dateCol\":\"1922-11-02\",\"datetimeCol\":\"2004-05-23 14:25:10.487\",\"datetime2Col\":\"2007-05-02 19:58:47.1234567\",\"datetimeOffsetCol\":\"2025-12-10 12:32:10.1234567+01:00\"}";
 
-                // Insert data directly
-                String insertSql = "INSERT INTO " + dstTable + " VALUES ('" + data + "')";
-                dstStmt.executeUpdate(insertSql);
+                bulkCopy.writeToServer(new BulkRecordJSON(data));
 
                 String select = "SELECT * FROM " + dstTable;
                 ResultSet rs = dstStmt.executeQuery(select);
