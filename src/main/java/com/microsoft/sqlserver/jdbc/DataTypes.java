@@ -985,7 +985,7 @@ enum JDBCType {
      * @return true if the JDBC type is textual
      */
     private final static EnumSet<Category> textualCategories = EnumSet.of(Category.CHARACTER, Category.LONG_CHARACTER,
-    Category.CLOB, Category.NCHARACTER, Category.LONG_NCHARACTER, Category.NCLOB, Category.JSON); //FIXME: JSON is textual?
+    Category.CLOB, Category.NCHARACTER, Category.LONG_NCHARACTER, Category.NCLOB);
 
     boolean isTextual() {
         return textualCategories.contains(category);
