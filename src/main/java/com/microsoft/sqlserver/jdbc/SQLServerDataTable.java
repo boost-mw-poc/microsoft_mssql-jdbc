@@ -321,9 +321,9 @@ public final class SQLServerDataTable {
                     break;
 
                 case VECTOR:
-                    nValueLen = ((Vector) val).getActualLength();
-                    int scaleByte = ((Vector) val).getScale();
-                    int scale = Vector.getbytesPerDimensionFromScale(scaleByte);
+                    nValueLen = ((Vector) val).getVectorLength();
+                    int scaleByte = ((Vector) val).getScaleByte();
+                    int scale = Vector.getBytesPerDimensionFromScale(scaleByte);
                     precision = ((Vector) val).getDimensionCount();
                     if (scale > currentColumnMetadata.scale) {
                         currentColumnMetadata.scale = scale;
