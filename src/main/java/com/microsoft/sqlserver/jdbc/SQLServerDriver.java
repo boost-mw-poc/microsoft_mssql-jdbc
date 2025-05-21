@@ -612,7 +612,8 @@ enum SQLServerDriverStringProperty {
     DATETIME_DATATYPE("datetimeParameterType", DatetimeType.DATETIME2.toString()),
     ACCESS_TOKEN_CALLBACK_CLASS("accessTokenCallbackClass", ""),
     RETRY_EXEC("retryExec", ""),
-    RETRY_CONN("retryConn", "");
+    RETRY_CONN("retryConn", ""),
+    VECTOR_TYPE_SUPPORT("vectorTypeSupport", "v1");
 
     private final String name;
     private final String defaultValue;
@@ -969,6 +970,8 @@ public final class SQLServerDriver implements java.sql.Driver {
                     Boolean.toString(SQLServerDriverBooleanProperty.BULK_COPY_FOR_BATCH_INSERT_ALLOW_ENCRYPTED_VALUE_MODIFICATIONS.getDefaultValue()),false, TRUE_FALSE),
             new SQLServerDriverPropertyInfo(SQLServerDriverBooleanProperty.ENABLE_BULK_COPY_CACHE.toString(),
                     Boolean.toString(SQLServerDriverBooleanProperty.ENABLE_BULK_COPY_CACHE.getDefaultValue()),false, TRUE_FALSE),
+            new SQLServerDriverPropertyInfo(SQLServerDriverStringProperty.VECTOR_TYPE_SUPPORT.toString(),
+                    SQLServerDriverStringProperty.VECTOR_TYPE_SUPPORT.getDefaultValue(), false, new String[] {"off", "v1"}),
             new SQLServerDriverPropertyInfo(SQLServerDriverStringProperty.MSI_CLIENT_ID.toString(),
                     SQLServerDriverStringProperty.MSI_CLIENT_ID.getDefaultValue(), false, null),
             new SQLServerDriverPropertyInfo(SQLServerDriverStringProperty.KEY_VAULT_PROVIDER_CLIENT_ID.toString(),
